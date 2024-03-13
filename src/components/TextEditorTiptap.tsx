@@ -48,7 +48,7 @@ function TextEditorTiptap({ content, onChange }: Props) {
         interfaceLanguage: "pt-BR",
         ccLanguage: "pt-BR",
         HTMLAttributes: {
-          class: "mx-auto rounded-lg border shadow-sm w-full aspect-video",
+          class: "mx-auto rounded-lg border shadow-sm w-full aspect-[16/9]",
         },
       }),
       Link.configure({

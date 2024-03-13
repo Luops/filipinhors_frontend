@@ -11,7 +11,7 @@ export default function Home() {
     setRichText(novoRichText);
   };
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start mx-auto">
+    <div className="w-full min-h-screen flex flex-col items-center justify-start mx-auto">
       <h1>Home</h1>
       {/* 
       <TextEditorTiptap

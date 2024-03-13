@@ -22,6 +22,19 @@ import TextEditorTiptap from "@/components/TextEditorTiptap";
 import { categories } from "@/data/data";
 import { Button } from "@/components/ui/button";
 
+// Shadcn
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 type Post = {
   title: string;
   content: string;
@@ -53,7 +66,8 @@ export default function PostCreationForm() {
   const [richText, setRichText] = React.useState("");
 
   // Função de submit
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Impede o comportamento padrão do formulário de atualizar a página
     setIsLoading(true);
     try {
       const formDataToSend = new FormData();
@@ -71,6 +85,7 @@ export default function PostCreationForm() {
           "Content-Type": "multipart/form-data", // Importante definir o tipo de conteúdo como multipart/form-data
         },
       });
+      setPostSended(true);
       console.log("Publicação criada com sucesso:", response.data);
     } catch (e) {
       console.error("Erro ao criar produto:", e);
@@ -109,16 +124,29 @@ export default function PostCreationForm() {
     }
   };
 
-  // Quando o formulário for enviado
   React.useEffect(() => {
-    if (postSended) {
-      router.push("/");
-    }
+    window.scrollTo(0, 0); // Isso irá rolar a página para o topo após o carregamento
   }, []);
 
   return (
-    <section className="w-[900px] mt-2">
-      <article className="relative">
+    <section className="w-[900px] relative mt-2">
+      {postSended && (
+        <article className="fixed flex flex-col items-start justify-center px-10 py-10 gap-5 bg-white border border-gray-300 shadow-md rounded-lg z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <h3 className="text-xl font-extrabold">
+            Publicação criada com sucesso!
+          </h3>
+          <p className="text-sm text-gray-500">
+            Retorne para a página inicial clicando no botão abaixo:
+          </p>
+          <Button
+            onClick={() => router.push("/Dashboard")}
+            className="self-end"
+          >
+            Concluir
+          </Button>
+        </article>
+      )}
+      <article className={`relative ${postSended ? "blur" : ""}`}>
         <Button
           onClick={() => router.back()}
           className="absolute top-5 left-[-70px]"
@@ -130,7 +158,11 @@ export default function PostCreationForm() {
             Criar Publicação
           </h2>
         </div>
-        <form onSubmit={handleSubmit} className="px-5 py-3 flex flex-col gap-5">
+        <form
+          onSubmit={handleSubmit}
+          method="post"
+          className="px-5 py-3 flex flex-col gap-5"
+        >
           {/*Enviar imagem de capa */}
           <label
             htmlFor="file"

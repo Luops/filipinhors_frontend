@@ -57,7 +57,7 @@ function Page({
 
   console.log(post);
 
-  return <section>
+  return <section className="!w-[10%] flex flex-col items-center">
     {post && <PostComponent post={post} />}
   </section>;
 }
