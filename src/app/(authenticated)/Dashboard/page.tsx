@@ -147,13 +147,13 @@ export default function Dashboard({}: Post) {
                   className="flex w-full justify-between border-b pb-1"
                 >
                   <td className="flex">
-                    <figure>
+                    <picture className="w-[100px] h-[60px] overflow-hidden shadow-sm rounded-sm bg-auto bg-no-repeat bg-center">
                       <img
                         src={post.url}
                         alt="Imagem"
-                        className="w-[100px] max-h-[80px] shadow-sm rounded-sm bg-center bg-cover"
+                        className="w-full h-full object-cover"
                       />
-                    </figure>
+                    </picture>
                     <p className="ml-[4.5rem] text-gray-500">
                       {titleTruncatedUpper(post.title)}
                     </p>
@@ -172,7 +172,7 @@ export default function Dashboard({}: Post) {
                             href={`/${categoryUpper(post.category)}/${
                               post.urlPost
                             }`}
-                            className="cursor-pointer"
+                            className="w-full cursor-pointer"
                           >
                             Ver
                           </Link>
@@ -180,14 +180,14 @@ export default function Dashboard({}: Post) {
                         <DropdownMenuItem>
                           <Link
                             href={`Dashboard/EditPost/${post._id}`}
-                            className="cursor-pointer"
+                            className="w-full cursor-pointer"
                           >
                             Editar
                           </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={() => handleDelete(post._id)}
-                          className="cursor-pointer"
+                          className="w-full cursor-pointer"
                         >
                           Excluir
                         </DropdownMenuItem>

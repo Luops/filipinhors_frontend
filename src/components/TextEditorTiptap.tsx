@@ -27,7 +27,6 @@ function TextEditorTiptap({ content, onChange }: Props) {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({}),
-      Text,
       Heading.configure({
         HTMLAttributes: {
           class: "text-3xl",
@@ -48,7 +47,7 @@ function TextEditorTiptap({ content, onChange }: Props) {
         interfaceLanguage: "pt-BR",
         ccLanguage: "pt-BR",
         HTMLAttributes: {
-          class: "mx-auto rounded-lg border shadow-sm w-full aspect-[16/9]",
+          class: "mx-auto rounded-lg border shadow-sm w-full aspect-[16/9] max-[640px]:h-[250px] ",
         },
       }),
       Link.configure({

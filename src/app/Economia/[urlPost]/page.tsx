@@ -1,10 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useLayoutEffect } from "react";
 
 // Next
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 // Services
 import { getPostByUrlPost } from "@/services/get-post-byurlpost";
@@ -21,7 +22,16 @@ type Post = {
   url: string;
   urlPost: string;
   file: File | null;
+  createdAt: string;
 };
+
+type PageProps = {
+  post: Post;
+};
+
+interface CustomRouterInstance extends AppRouterInstance {
+  isFallback?: boolean;
+}
 
 function Page({
   _id,
@@ -32,8 +42,10 @@ function Page({
   url,
   urlPost,
   file,
+  createdAt,
 }: Post) {
   const [post, setPost] = React.useState({
+    _id: _id,
     title: title,
     content: content,
     category: category,
@@ -41,25 +53,31 @@ function Page({
     url: url,
     urlPost: urlPost,
     file: file,
+    createdAt: createdAt,
   });
 
   const params = useParams<{ urlPost: string }>();
-  const router = useRouter();
+  const router = useRouter() as CustomRouterInstance;
 
-  // Buscar os dados da publicação
-  React.useEffect(() => {
-    const response = getPostByUrlPost(params.urlPost).then((response) => {
-      if (response) {
-        setPost(response);
-      }
-    });
+  // Buscar os dados da publicação usando useLayoutEffect
+  useLayoutEffect(() => {
+    getPostData();
   }, []);
+
+  const getPostData = async () => {
+    const response = await getPostByUrlPost(params.urlPost);
+    if (response) {
+      setPost(response);
+    }
+  };
 
   console.log(post);
 
-  return <section className="!w-[10%] flex flex-col items-center">
-    {post && <PostComponent post={post} />}
-  </section>;
+  return (
+    <section className="flex flex-col items-center">
+      {post && <PostComponent post={post} />}
+    </section>
+  );
 }
 
 export default Page;
