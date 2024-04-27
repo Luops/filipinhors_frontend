@@ -23,9 +23,9 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <Head />
-      <body className="w-screen min-h-screen font-roboto scroll-smooth">
+      <body className="w-full min-h-screen font-roboto scroll-smooth">
         <Header />
-        <main className="flex flex-col items-center justify-start mx-auto mt-[5.3rem]">
+        <main className="w-full flex flex-col items-center justify-start mx-auto mt-[3.8rem]">
           {children}
         </main>
       </body>

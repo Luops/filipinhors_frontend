@@ -1,23 +1,10 @@
 "use client";
 import React from "react";
 
-// Components
-import TextEditorTiptap from "@/components/TextEditorTiptap";
-
 export default function Home() {
-  const [richText, setRichText] = React.useState("");
-
-  const handleRichTextChange = (novoRichText: any) => {
-    setRichText(novoRichText);
-  };
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-start mx-auto">
-      <h1>Home</h1>
-      {/* 
-      <TextEditorTiptap
-        description={richText}
-        onChange={handleRichTextChange}
-      />*/}
-    </div>
+    <section className="min-[1064px]:w-[1064px] w-screen min-h-screen flex flex-col items-center justify-start mx-auto max-[1064px]:mt-0 mt-5 gap-10">
+      <h2>Home</h2>
+    </section>
   );
 }

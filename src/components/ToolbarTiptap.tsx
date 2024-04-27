@@ -167,7 +167,7 @@ function ToolbarTiptap({ editor }: Props) {
   }
 
   return (
-    <div className="w-full flex flex-wrap items-center justify-start px-2 py-1 mb-1 border border-input bg-transparent rounded gap-2">
+    <div className="sticky top-[5.2rem] z-[49] bg-white w-full flex flex-wrap items-center justify-start px-2 py-1 mb-1 border border-input bg-transparent rounded gap-2">
       {/* Bold */}
       <Toggle
         size="sm"

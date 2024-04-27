@@ -78,7 +78,7 @@
   }
 }
 
-/* Esconde a barra de rolagem */
+/* Esconde a barra de rolagem 
 ::-webkit-scrollbar, ::-webkit-scrollbar-track, ::-webkit-scrollbar-thumb {
   display: none;
-}
+}*/
